@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>抗菌薬クイズ王</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234f46e5'><rect x='4' y='9' width='16' height='6' rx='3'/><rect x='9' y='4' width='6' height='16' rx='3'/></svg>">
+</head>
+<body>
+  <div id="app">
+    <!-- 名前入力画面 -->
+    <div id="screen-name" class="screen active">
+      <div class="start-container">
+        <div class="logo-area">
+          <div class="logo-icon">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="8" y="18" width="32" height="12" rx="6" fill="#4f46e5"/>
+              <rect x="18" y="8" width="12" height="32" rx="6" fill="#7c3aed"/>
+              <rect x="18" y="18" width="12" height="12" rx="2" fill="#6366f1"/>
+            </svg>
+          </div>
+          <h1 class="app-title">抗菌薬クイズ王</h1>
+          <p class="app-subtitle">初期研修医のための抗菌薬トレーニング</p>
+        </div>
+
+        <div class="name-input-card">
+          <label class="section-label" for="input-name">名前を入力してください</label>
+          <input type="text" id="input-name" class="text-input" placeholder="例：田中太郎" autocomplete="name">
+        </div>
+
+        <button id="btn-name-submit" class="btn-primary" disabled>はじめる</button>
+      </div>
+    </div>
+
+    <!-- スタート画面 -->
+    <div id="screen-start" class="screen">
+      <div class="start-container">
+        <div class="start-header">
+          <h2 class="start-greeting" id="start-greeting"></h2>
+        </div>
+
+        <div class="progress-card" id="progress-summary"></div>
+
+        <div class="mode-select">
+          <p class="section-label">出題モード</p>
+          <div class="mode-toggle">
+            <button class="mode-tab selected" data-mode="random">ランダム</button>
+            <button class="mode-tab" data-mode="category">カテゴリ別</button>
+            <div class="mode-slider"></div>
+          </div>
+        </div>
+
+        <div id="category-select" class="category-select hidden">
+          <div id="category-list" class="category-list"></div>
+        </div>
+
+        <button id="btn-start" class="btn-primary">スタート</button>
+        <button id="btn-reset" class="btn-text">進捗をリセット</button>
+      </div>
+    </div>
+
+    <!-- クイズ画面 -->
+    <div id="screen-quiz" class="screen">
+      <div class="quiz-header">
+        <button id="btn-home" class="btn-back" title="ホームに戻る">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="quiz-header-center">
+          <span id="quiz-category" class="quiz-category-badge"></span>
+        </div>
+        <span id="quiz-counter" class="quiz-counter-text"></span>
+      </div>
+
+      <div class="quiz-progress-bar">
+        <div id="quiz-progress-fill" class="quiz-progress-fill"></div>
+      </div>
+
+      <div class="quiz-body">
+        <div class="question-card">
+          <p id="question-text" class="question-text"></p>
+        </div>
+
+        <div id="choices" class="choices"></div>
+      </div>
+
+      <div id="explanation-panel" class="explanation-panel hidden">
+        <div id="result-badge" class="result-badge"></div>
+        <div id="explanation-text" class="explanation-text"></div>
+        <button id="btn-detail" class="btn-detail">
+          <span class="btn-detail-label">さらに詳しく</span>
+          <svg class="btn-detail-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div id="detail-panel" class="detail-panel hidden">
+          <pre id="detail-text" class="detail-text"></pre>
+        </div>
+        <button id="btn-next" class="btn-primary">次の問題へ</button>
+      </div>
+    </div>
+
+    <!-- 完了画面 -->
+    <div id="screen-complete" class="screen">
+      <div class="complete-container">
+        <div class="complete-icon">
+          <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="28" cy="28" r="28" fill="#ecfdf5"/>
+            <circle cx="28" cy="28" r="20" fill="#059669"/>
+            <path d="M20 28l6 6 10-12" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h2 class="complete-title">お疲れさまでした！</h2>
+        <div id="complete-stats" class="complete-stats"></div>
+        <button id="btn-retry" class="btn-primary">もう一度チャレンジ</button>
+        <button id="btn-back-home" class="btn-text">ホームに戻る</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="data/questions.js"></script>
+  <script src="data/summaries.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
